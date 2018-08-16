@@ -132,23 +132,26 @@ namespace RL_MDP
 
         public static void Main(string[] args)
         {
-            int R = 6;
-            int C = 6;
+            int R = 9;
+            int C = 9;
 
             GridSpace g = new GridSpace(R, C);
             GridSpace og = new GridSpace(R, C);
 
-            g.restrictValue(1, 3, -10);
+            g.restrictValue(0, 3, -501);
             g.restrictValue(2, 3, 20);
+            g.restrictValue(4, 8, 40);
 
             g.NoGo(1, 1);
-            g.NoGo(2, 1);
-            g.NoGo(5, 5);
-            g.Print();
+            g.NoGo(2, 2);
+            g.NoGo(2, 0);
+            g.NoGo(3, 3);
+            g.restrictValue(5, 5, 30);
+            //g.Print();
 
-            ValueIteration vi = new ValueIteration(g,0.9,-10.05, actions, costFunction);
+            ValueIteration vi = new ValueIteration(g,0.7,-100.15, actions, costFunction);
             PolicyMaker pm = new PolicyMaker(vi, 0.000002, IP);
-            pm.getBestPolicy(true).Print();
+            pm.getBestPolicy().Print();
 
         }
 
